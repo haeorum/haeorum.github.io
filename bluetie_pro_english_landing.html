@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="100명, 200명의 벽을 넘어 500명을 내다보는 영어학원 성장 시스템. 블루타이 프로 영어과정 1기 모집." />
+  <title>블루타이 프로 영어과정 1기</title>
+  <style>
+    :root{
+      --bg:#07090d;
+      --panel:#10141c;
+      --panel2:#141a24;
+      --line:#273043;
+      --text:#f7f9fc;
+      --muted:#aeb8c8;
+      --blue:#2e7cff;
+      --blue2:#63a4ff;
+      --cyan:#55d8ff;
+      --green:#72e1a3;
+      --danger:#ff6b6b;
+      --shadow:0 20px 60px rgba(0,0,0,.38);
+      --radius:24px;
+      --max:1180px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at 80% 0%,rgba(46,124,255,.18),transparent 28%),
+        radial-gradient(circle at 10% 10%,rgba(85,216,255,.08),transparent 25%),
+        var(--bg);
+      color:var(--text);
+      font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",Arial,sans-serif;
+      line-height:1.65;
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{width:min(calc(100% - 36px),var(--max));margin:0 auto}
+    .topbar{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:blur(16px);
+      background:rgba(7,9,13,.78);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .nav{
+      min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px
+    }
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:-.03em}
+    .logo{
+      width:34px;height:34px;border-radius:10px;
+      background:linear-gradient(135deg,var(--blue),var(--cyan));
+      display:grid;place-items:center;box-shadow:0 10px 30px rgba(46,124,255,.35)
+    }
+    .logo:before{content:"B";font-weight:900;color:white}
+    .navlinks{display:flex;gap:24px;color:#c7cfdb;font-size:14px}
+    .nav-cta,.btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      border-radius:14px;padding:14px 22px;font-weight:800;
+      transition:.25s ease;border:1px solid transparent;cursor:pointer
+    }
+    .nav-cta{padding:11px 16px;background:white;color:#0c1119}
+    .btn.primary{
+      background:linear-gradient(135deg,var(--blue),#1450d8);
+      color:white;box-shadow:0 14px 40px rgba(46,124,255,.34)
+    }
+    .btn.secondary{border-color:#33405a;background:rgba(255,255,255,.035)}
+    .btn:hover,.nav-cta:hover{transform:translateY(-2px)}
+    .hero{padding:96px 0 72px;position:relative;overflow:hidden}
+    .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:54px;align-items:center}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;
+      color:#b9d2ff;background:rgba(46,124,255,.12);
+      border:1px solid rgba(99,164,255,.24);border-radius:999px;padding:8px 13px;
+      font-size:13px;font-weight:700
+    }
+    .dot{width:8px;height:8px;background:var(--green);border-radius:50%;box-shadow:0 0 18px var(--green)}
+    h1{font-size:clamp(44px,7vw,82px);line-height:1.06;margin:26px 0 24px;letter-spacing:-.055em}
+    .accent{
+      background:linear-gradient(90deg,#fff 0%,#7fb2ff 45%,#55d8ff 100%);
+      -webkit-background-clip:text;background-clip:text;color:transparent
+    }
+    .lead{font-size:clamp(18px,2vw,23px);color:#c8d0dc;max-width:760px}
+    .lead strong{color:white}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+    .micro{color:#8f9bad;font-size:13px;margin-top:14px}
+    .hero-card{
+      background:linear-gradient(180deg,rgba(23,31,45,.95),rgba(12,16,24,.95));
+      border:1px solid rgba(255,255,255,.1);border-radius:28px;padding:30px;box-shadow:var(--shadow);
+      position:relative;overflow:hidden
+    }
+    .hero-card:before{
+      content:"";position:absolute;inset:-100px auto auto -80px;width:240px;height:240px;
+      background:radial-gradient(circle,rgba(46,124,255,.35),transparent 65%)
+    }
+    .coach{
+      height:310px;border-radius:22px;
+      background:
+        radial-gradient(circle at 50% 20%,#8ab7ff 0 7%,transparent 7.5%),
+        radial-gradient(circle at 50% 38%,#2e7cff 0 17%,transparent 17.5%),
+        linear-gradient(145deg,#121823,#1a2538);
+      border:1px solid rgba(255,255,255,.08);
+      position:relative;overflow:hidden;
+    }
+    .coach:after{
+      content:"0명에서 500명";position:absolute;left:22px;bottom:22px;
+      font-size:30px;font-weight:900;letter-spacing:-.04em
+    }
+    .coach-name{margin-top:20px}
+    .coach-name b{display:block;font-size:22px}
+    .coach-name span{color:var(--muted)}
+    .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+    .stat{background:#0d121b;border:1px solid #253049;border-radius:16px;padding:16px}
+    .stat b{font-size:24px;display:block}
+    .stat span{font-size:12px;color:var(--muted)}
+    section{padding:86px 0}
+    .section-head{max-width:760px;margin-bottom:38px}
+    .kicker{color:var(--blue2);font-weight:800;letter-spacing:.08em;font-size:13px}
+    h2{font-size:clamp(32px,4.5vw,56px);line-height:1.15;margin:12px 0 16px;letter-spacing:-.045em}
+    .desc{color:#aeb8c8;font-size:18px}
+    .problem-grid,.review-grid,.faq-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{
+      background:linear-gradient(180deg,var(--panel2),var(--panel));
+      border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:28px;
+      box-shadow:0 12px 35px rgba(0,0,0,.18)
+    }
+    .num{font-size:13px;font-weight:900;color:var(--blue2);letter-spacing:.08em}
+    .card h3{font-size:22px;line-height:1.35;margin:12px 0}
+    .card p{color:var(--muted);margin:0}
+    .story{
+      display:grid;grid-template-columns:.85fr 1.15fr;gap:36px;align-items:stretch
+    }
+    .story-visual{
+      min-height:470px;border-radius:28px;border:1px solid rgba(255,255,255,.08);
+      background:
+        linear-gradient(180deg,transparent,rgba(6,8,12,.85)),
+        radial-gradient(circle at 50% 20%,rgba(99,164,255,.55),transparent 18%),
+        linear-gradient(145deg,#1d2a41,#0c1119 62%);
+      display:flex;align-items:flex-end;padding:30px;position:relative;overflow:hidden
+    }
+    .story-visual .big{font-size:clamp(54px,8vw,100px);font-weight:950;letter-spacing:-.06em}
+    .timeline{display:grid;gap:14px}
+    .step{display:grid;grid-template-columns:70px 1fr;gap:18px;align-items:start;padding:22px 0;border-bottom:1px solid #273043}
+    .step:last-child{border-bottom:0}
+    .step .label{color:var(--blue2);font-weight:900}
+    .step h3{margin:0 0 6px;font-size:22px}
+    .step p{margin:0;color:var(--muted)}
+    .curriculum{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .module{display:flex;gap:18px;align-items:flex-start}
+    .icon{
+      flex:0 0 48px;height:48px;border-radius:15px;display:grid;place-items:center;
+      background:rgba(46,124,255,.14);border:1px solid rgba(99,164,255,.24);
+      color:#bcd4ff;font-weight:900
+    }
+    .module small{color:var(--blue2);font-weight:800}
+    .module h3{margin:3px 0 7px;font-size:21px}
+    .module p{margin:0;color:var(--muted)}
+    .promise{
+      margin-top:22px;padding:24px;border-radius:20px;
+      background:linear-gradient(90deg,rgba(46,124,255,.14),rgba(85,216,255,.08));
+      border:1px solid rgba(99,164,255,.24);display:flex;justify-content:space-between;gap:20px;align-items:center
+    }
+    .promise b{font-size:21px}
+    .quote{font-size:20px;line-height:1.55;color:#ecf2fa}
+    .review-meta{margin-top:18px;color:#8da8d2;font-size:14px}
+    .faq{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    details{
+      background:#111722;border:1px solid #263149;border-radius:18px;padding:20px 22px
+    }
+    summary{cursor:pointer;font-weight:800;list-style:none}
+    summary::-webkit-details-marker{display:none}
+    details p{color:var(--muted);margin:14px 0 0}
+    .cta{
+      padding:88px 0 110px
+    }
+    .cta-box{
+      border-radius:32px;padding:56px;
+      background:
+        radial-gradient(circle at 80% 20%,rgba(85,216,255,.18),transparent 30%),
+        linear-gradient(135deg,#183b89,#0c1525 65%);
+      border:1px solid rgba(255,255,255,.12);text-align:center;box-shadow:var(--shadow)
+    }
+    .cta-box h2{max-width:800px;margin:0 auto 18px}
+    .cta-box p{color:#c7d2e3;max-width:700px;margin:0 auto 28px;font-size:18px}
+    footer{padding:26px 0 40px;color:#7f8a9b;font-size:13px;border-top:1px solid #202837}
+    .sticky-cta{
+      display:none;position:fixed;left:12px;right:12px;bottom:12px;z-index:60;
+      background:linear-gradient(135deg,var(--blue),#144fcf);padding:15px 18px;border-radius:16px;
+      text-align:center;font-weight:900;box-shadow:0 16px 40px rgba(0,0,0,.45)
+    }
+    @media(max-width:900px){
+      .navlinks{display:none}
+      .hero{padding-top:64px}
+      .hero-grid,.story{grid-template-columns:1fr}
+      .problem-grid,.review-grid{grid-template-columns:1fr}
+      .curriculum,.faq{grid-template-columns:1fr}
+      .hero-card{max-width:580px}
+      .sticky-cta{display:block}
+      footer{padding-bottom:95px}
+    }
+    @media(max-width:560px){
+      .wrap{width:min(calc(100% - 24px),var(--max))}
+      .nav-cta{display:none}
+      h1{font-size:44px}
+      section{padding:66px 0}
+      .stat-row{grid-template-columns:1fr}
+      .hero-actions .btn{width:100%}
+      .cta-box{padding:38px 22px}
+      .promise{align-items:flex-start;flex-direction:column}
+      .story-visual{min-height:360px}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap nav">
+      <a class="brand" href="#top"><span class="logo"></span><span>BLUE TIE PRO</span></a>
+      <nav class="navlinks">
+        <a href="#story">성장 스토리</a>
+        <a href="#curriculum">커리큘럼</a>
+        <a href="#reviews">수강 후기</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a class="nav-cta" href="#apply">1기 신청하기</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow"><span class="dot"></span>블루타이 프로 영어과정 1기 모집</span>
+          <h1>100명, 200명의 벽을<br><span class="accent">이번에는 넘으십시오.</span></h1>
+          <p class="lead">
+            원장님의 열정이 부족해서 멈춘 것이 아닙니다.
+            <strong>성장을 반복시키는 구조가 없었기 때문입니다.</strong>
+            0명에서 500명을 만든 실제 운영 시스템을 8주 동안 함께 설계합니다.
+          </p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#apply">지금 신청하기 →</a>
+            <a class="btn secondary" href="#curriculum">8주 과정 살펴보기</a>
+          </div>
+          <p class="micro">※ 동일 행정지역 내 한 개 학원만 참여 가능합니다.</p>
+        </div>
+
+        <aside class="hero-card">
+          <div class="coach"></div>
+          <div class="coach-name">
+            <b>최종수 대표</b>
+            <span>0명에서 500명 신화를 만든 토마스에듀 대표</span>
+          </div>
+          <div class="stat-row">
+            <div class="stat"><b>8주</b><span>실전 성장 설계</span></div>
+            <div class="stat"><b>6대</b><span>핵심 운영 시스템</span></div>
+            <div class="stat"><b>1지역</b><span>1개 학원 한정</span></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">WHY NOW</div>
+          <h2>학생 수가 늘지 않는 이유를<br>원장님의 능력 탓으로 돌리지 마십시오.</h2>
+          <p class="desc">학원이 성장할수록 상담, 관리, 강사 운영, 커리큘럼은 더 복잡해집니다. 성장 정체는 의지의 문제가 아니라 구조의 문제입니다.</p>
+        </div>
+        <div class="problem-grid">
+          <article class="card">
+            <div class="num">01</div>
+            <h3>모객은 되는데 등록이 안 됩니다.</h3>
+            <p>문의가 들어와도 상담의 흐름과 설득 구조가 없으면 학부모의 선택으로 이어지지 않습니다.</p>
+          </article>
+          <article class="card">
+            <div class="num">02</div>
+            <h3>학생이 늘수록 원장만 더 바빠집니다.</h3>
+            <p>운영 기준과 역할 분담이 없으면 원장님의 시간이 학원의 성장 한계가 됩니다.</p>
+          </article>
+          <article class="card">
+            <div class="num">03</div>
+            <h3>좋은 수업이 재등록을 보장하지 않습니다.</h3>
+            <p>학부모가 체감할 수 있는 관리와 소통이 있어야 신뢰가 쌓이고 소개와 재등록이 만들어집니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="story">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">GROWTH STORY</div>
+          <h2>0명에서 500명까지<br>성장은 우연이 아니었습니다.</h2>
+        </div>
+        <div class="story">
+          <div class="story-visual">
+            <div>
+              <div class="big">0 → 500</div>
+              <p>한 번의 이벤트가 아니라 포지셔닝, 모객, 상담, 교육, 소통, 강사 운영이 연결된 시스템의 결과입니다.</p>
+            </div>
+          </div>
+          <div class="timeline">
+            <div class="step">
+              <div class="label">STEP 1</div>
+              <div><h3>선택받는 영어학원으로 포지셔닝</h3><p>우리 학원이 누구에게 어떤 변화를 만드는지 한 문장으로 정리합니다.</p></div>
+            </div>
+            <div class="step">
+              <div class="label">STEP 2</div>
+              <div><h3>지역에서 반복되는 모객 구조 구축</h3><p>시즌마다 광고비를 태우는 방식이 아니라 지역 학부모가 계속 유입되는 접점을 만듭니다.</p></div>
+            </div>
+            <div class="step">
+              <div class="label">STEP 3</div>
+              <div><h3>상담을 등록으로 전환</h3><p>학부모의 불안을 읽고 신뢰의 근거를 보여주는 상담 시나리오를 설계합니다.</p></div>
+            </div>
+            <div class="step">
+              <div class="label">STEP 4</div>
+              <div><h3>원장이 없어도 돌아가는 시스템</h3><p>커리큘럼, 학부모 소통, 강사 운영 기준을 정리해 학원의 성장 한계를 넓힙니다.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="curriculum">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">8-WEEK CURRICULUM</div>
+          <h2>듣고 끝나는 강의가 아니라<br>학원에 남는 결과물을 만듭니다.</h2>
+          <p class="desc">각 주차의 과제와 실습을 통해 우리 학원만의 성장 시스템을 완성합니다.</p>
+        </div>
+        <div class="curriculum">
+          <article class="card module"><div class="icon">1</div><div><small>WEEK 1</small><h3>영어학원 포지셔닝</h3><p>지역에서 선택받을 이유와 학원의 핵심 메시지를 정리합니다.</p></div></article>
+          <article class="card module"><div class="icon">2</div><div><small>WEEK 2</small><h3>지역 모객 시스템</h3><p>지역 분석, 학부모 접점, 시즌별 모집 전략을 연결합니다.</p></div></article>
+          <article class="card module"><div class="icon">3</div><div><small>WEEK 3</small><h3>상담 전환 설계</h3><p>문의부터 방문, 진단, 제안, 등록까지 상담 흐름을 만듭니다.</p></div></article>
+          <article class="card module"><div class="icon">4</div><div><small>WEEK 4</small><h3>커리큘럼 구조화</h3><p>원장님의 노하우를 학부모가 이해할 수 있는 교육 체계로 바꿉니다.</p></div></article>
+          <article class="card module"><div class="icon">5</div><div><small>WEEK 5</small><h3>학부모 소통 시스템</h3><p>재등록과 소개를 높이는 상담, 리포트, 정기 소통 기준을 세웁니다.</p></div></article>
+          <article class="card module"><div class="icon">6</div><div><small>WEEK 6</small><h3>강사 운영 시스템</h3><p>채용, 교육, 피드백, 역할 기준을 정리해 원장 의존도를 낮춥니다.</p></div></article>
+          <article class="card module"><div class="icon">7</div><div><small>WEEK 7</small><h3>성장 지표와 실행관리</h3><p>학생 수, 상담률, 등록률, 재등록률을 관리하는 숫자의 기준을 만듭니다.</p></div></article>
+          <article class="card module"><div class="icon">8</div><div><small>WEEK 8</small><h3>우리 학원 성장 로드맵</h3><p>90일 실행계획과 500명을 내다보는 단계별 성장 지도를 완성합니다.</p></div></article>
+        </div>
+        <div class="promise">
+          <div><b>8주 후 원장님 손에 남는 것</b><br><span style="color:#aeb8c8">포지셔닝 문장 · 지역 모객 계획 · 상담 시나리오 · 커리큘럼 구조 · 학부모 소통 기준 · 강사 운영 매뉴얼</span></div>
+          <a class="btn primary" href="#apply">과정 신청하기</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="reviews">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">VOICE</div>
+          <h2>먼저 경험한 원장님들은<br>‘운영이 보이기 시작했다’고 말합니다.</h2>
+          <p class="desc">아래 문구는 실제 후기 입력을 위한 예시 영역입니다. 운영 중인 후기 문구로 교체해 사용하실 수 있습니다.</p>
+        </div>
+        <div class="review-grid">
+          <article class="card">
+            <div class="quote">“열심히만 하면 된다고 생각했는데 무엇을 시스템으로 바꿔야 하는지 보이기 시작했습니다.”</div>
+            <div class="review-meta">초중등 영어학원 원장 · 경기</div>
+          </article>
+          <article class="card">
+            <div class="quote">“상담이 설명 중심에서 선택을 돕는 구조로 바뀌었습니다. 학부모의 반응부터 달라졌습니다.”</div>
+            <div class="review-meta">중등 영어학원 원장 · 서울</div>
+          </article>
+          <article class="card">
+            <div class="quote">“500명이라는 숫자가 막연한 꿈이 아니라 단계별로 준비할 수 있는 목표처럼 느껴졌습니다.”</div>
+            <div class="review-meta">초중고 영어학원 원장 · 인천</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">FAQ</div>
+          <h2>원장님들이 가장 많이 묻는 질문</h2>
+        </div>
+        <div class="faq">
+          <details open>
+            <summary>학생 수가 적어도 참여할 수 있나요?</summary>
+            <p>가능합니다. 현재 규모보다 성장 구조를 먼저 세우는 과정입니다. 50명 이하 학원도 포지셔닝과 모객, 상담 체계를 정리하며 성장 기반을 만들 수 있습니다.</p>
+          </details>
+          <details>
+            <summary>영어학원만 신청할 수 있나요?</summary>
+            <p>본 과정은 초중등 영어학원 운영에 맞춰 설계됐습니다. 영어과의 커리큘럼, 상담, 강사 운영 사례가 중심입니다.</p>
+          </details>
+          <details>
+            <summary>강의만 듣는 과정인가요?</summary>
+            <p>강의와 함께 실습, 과제, 피드백을 진행합니다. 매주 우리 학원에 적용할 결과물을 완성하는 방식입니다.</p>
+          </details>
+          <details>
+            <summary>동일 지역 제한은 왜 있나요?</summary>
+            <p>지역 내 직접 경쟁을 줄이고 참여 학원의 실행 집중도를 높이기 위한 운영 원칙입니다. 동일 행정지역 내 한 개 학원만 참여할 수 있습니다.</p>
+          </details>
+          <details>
+            <summary>원장 혼자 참여해야 하나요?</summary>
+            <p>핵심 의사결정은 원장님이 참여하시는 편이 좋습니다. 실무 적용을 위해 부원장이나 핵심 실무자와 함께 내용을 공유하는 것도 권장합니다.</p>
+          </details>
+          <details>
+            <summary>수강료와 일정은 어디서 확인하나요?</summary>
+            <p>아래 신청 버튼을 누르면 최신 일정, 수강료, 모집 가능 지역을 확인할 수 있습니다. 링크는 실제 신청 폼 주소로 교체해 주세요.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="apply" class="cta">
+      <div class="wrap">
+        <div class="cta-box">
+          <div class="kicker">BLUE TIE PRO 1ST</div>
+          <h2>원장님이 더 바빠지는 성장이 아니라<br>학원이 강해지는 성장을 시작하십시오.</h2>
+          <p>100명, 200명에서 멈춘 학원이라면 이번 8주가 다음 성장의 출발점이 될 수 있습니다. 동일 지역 한 개 학원 한정으로 모집합니다.</p>
+          <!-- 아래 href를 실제 신청 링크로 교체하세요 -->
+          <a class="btn primary" href="https://example.com" target="_blank" rel="noopener">블루타이 프로 영어과정 신청하기 →</a>
+          <p class="micro">신청 전 모집 가능 지역과 상세 일정을 확인해 주세요.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div>주최·운영: (주)해오름커뮤니케이션즈 · 한국학원대학교</div>
+      <div>본 페이지의 신청 링크, 수강료, 일정, 실제 수강 후기는 운영 정보에 맞게 교체해 주세요.</div>
+    </div>
+  </footer>
+
+  <a class="sticky-cta" href="#apply">블루타이 프로 영어과정 신청하기</a>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const id=a.getAttribute('href');
+        if(id.length>1){
+          const el=document.querySelector(id);
+          if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth'});}
+        }
+      })
+    });
+  </script>
+</body>
+</html>
